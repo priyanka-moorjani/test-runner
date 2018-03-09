@@ -11,6 +11,7 @@
     "express": "^4.16.1",
     "run-git-command": "1.0.1",
     "nodegit": "0.21.0",
-    "body-parser": "^1.8.1"
+    "body-parser": "^1.8.1",
+    "request": "2.83.0"
   }
 }
