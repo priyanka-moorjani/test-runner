@@ -89,7 +89,7 @@ app.post('/', (req, res) => {
       
         console.log(`stdout: ${stdout}`);
         console.log(`stderr: ${stderr}`);
-        res.send('Unit Test Pass\n');
+        res.send('Unit Test Pass');
       });
 
     });
