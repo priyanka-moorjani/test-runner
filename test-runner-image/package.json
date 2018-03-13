@@ -1,0 +1,18 @@
+{
+  "name": "docker_web_app",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.8.1",
+    "express": "^4.16.1",
+    "lodash": "^4.17.5",
+    "nodegit": "^0.21.0",
+    "request": "^2.83.0",
+    "run-git-command": "^1.0.1"
+  }
+}

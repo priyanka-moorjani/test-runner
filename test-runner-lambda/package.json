@@ -1,0 +1,16 @@
+{
+  "name": "mercury-test-runner-handler",
+  "version": "1.0.0",
+  "description": "lambda function for mercury unit test runner",
+  "main": "handler.js",
+  "dependencies": {
+    "lodash": "^4.17.5",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
