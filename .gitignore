@@ -1,5 +1,6 @@
 mercury
 node_modules
 lambda/node_modules
+test-runner-image/node_modules
 .idea
 .DS_STORE

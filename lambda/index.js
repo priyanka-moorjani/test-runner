@@ -3,8 +3,8 @@ const request = require('request-promise');
 const _get = require('lodash/get');
 const _includes = require('lodash/includes');
 const token = '8957b46d70ee24d34467d1cab97fcb7fc386a3af';
-const TEST_RUNNER_URL = 'http://05feb637.ngrok.io';
-const actions = ['reopen', 'open'];
+const TEST_RUNNER_URL = 'http://54.91.4.60';
+const actions = ['reopen', 'open', 'synchronize'];
 
 
 const STATUS_SUCCESS = 'success';
@@ -12,13 +12,6 @@ const STATUS_PENDING = 'pending';
 const STATUS_FAIL = 'failure';
 const STATUS_ERROR = 'error';
 
-
-const statusRequest = {
-    state: "pending",
-    target_url: "",
-    description: "pending",
-    context: "mercury unit test"
-};
 
 var headers =  {
     'Content-Type': 'application/json',
@@ -43,7 +36,6 @@ module.exports.handler = (event, context, callback) => {
     var commit = _get(body, 'pull_request.head.sha');
     var action = _get(body, 'action');
 
-    console.log(action);
     var statusRequest = {
         state: STATUS_PENDING,
         description: STATUS_PENDING,
@@ -64,7 +56,7 @@ module.exports.handler = (event, context, callback) => {
         // if(state !== 'pending') return;
 
         return request.post(TEST_RUNNER_URL, { json: {
-            branch: 'master',
+            branch: branch,
             commit: commit
         }});
 
@@ -72,16 +64,17 @@ module.exports.handler = (event, context, callback) => {
      //update github status from unit test service response
     .then((body) => {
 
-        if(body === 'Unit Test Pass\n') {
+        var status = _get(body, 'status');
+
+        if(status === 'success') {
             statusRequest.state = STATUS_SUCCESS;
             statusRequest.description = 'Unit test succeeded';
-        } else if (body === 'Unit Test Fail') {
+        } else if (status === 'fail') {
             statusRequest.state = STATUS_FAIL;
             statusRequest.description = 'Unit test failed';
-        } else if (body === 'error') {
+        } else if (status === 'error') {
             statusRequest.state = STATUS_ERROR;
             statusRequest.description = "Error running unit test";
-
         }
 
         if(statusRequest.state === 'pending') return;
