@@ -2,7 +2,7 @@
 const request = require('request-promise');
 const _get = require('lodash/get');
 const _includes = require('lodash/includes');
-const GIT_TOKEN = process.env.TOKEN;
+const GIT_TOKEN = process.env.Token;
 const TEST_RUNNER_URL = process.env.Test_Runner_Url;
 const actions = ['reopened', 'opened', 'synchronize'];
 
