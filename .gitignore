@@ -2,5 +2,8 @@ mercury
 node_modules
 lambda/node_modules
 test-runner-image/node_modules
+test-runner-image/id_rsa
+test-runner-image/id_rsa.pub
+test-runner-image/.netrc
 .idea
 .DS_STORE

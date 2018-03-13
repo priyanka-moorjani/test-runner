@@ -3,11 +3,10 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const git = require('nodegit');
-const util = require('util');
-const path = require("path");
+const path = require('path');
+const _get = require('lodash/get');
 const local = path.join.bind(path, __dirname);
 const { exec } = require('child_process');
-// const exec = util.promisify(require('child_process').exec);
 
 // Constants
 const PORT = 8080;
@@ -30,10 +29,14 @@ app.post('/', (req, res) => {
 
   console.log(req.body);
   res.setHeader('Content-Type', 'application/json');
-  var branch = req.body.branch;
+  var branch = _get(req, 'body.branch');
   var repository;
   var debug = 0;
 
+  if(!branch) {
+    errorHandler('branch not specified');
+    return;
+  }
   // Open repo and pull branch
   git.Repository.open('./mercury')
   
@@ -49,7 +52,7 @@ app.post('/', (req, res) => {
         },
         credentials: function(url, userName) {
           // avoid infinite loop when authentication agent is not loaded
-          if (debug++ > 10) throw "Authentication agent not loaded.";
+          if (debug++ > 10) throw 'Git authorization failed';
           // return git.Cred.sshKeyFromAgent(userName);
           // return git.Cred.defaultNew();
           return git.Cred.sshKeyNew(
