@@ -28,8 +28,6 @@ module.exports.handler = (event, context, callback) => {
         body: '{}'
     };
 
-    console.log(GIT_TOKEN);
-    console.log(TEST_RUNNER_URL);
     callback(null, response);
 
     var body = event.body? JSON.parse(event.body): {};

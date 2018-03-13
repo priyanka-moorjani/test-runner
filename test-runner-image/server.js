@@ -47,10 +47,10 @@ app.post('/', (req, res) => {
 
       callbacks: {
 
-        certificateCheck: function() {
+        certificateCheck: () => {
             return 1;
         },
-        credentials: function(url, userName) {
+        credentials: (url, userName) => {
           // avoid infinite loop when authentication agent is not loaded
           if (debug++ > 10) throw 'Git authorization failed';
           // return git.Cred.sshKeyFromAgent(userName);
