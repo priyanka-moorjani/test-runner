@@ -2,9 +2,9 @@
 const request = require('request-promise');
 const _get = require('lodash/get');
 const _includes = require('lodash/includes');
-const token = '8957b46d70ee24d34467d1cab97fcb7fc386a3af';
+const token = 'ba32224337cb37b2c8e2406dc1d56ff48f04d4dc';
 const TEST_RUNNER_URL = 'http://54.91.4.60';
-const actions = ['reopen', 'open', 'synchronize'];
+const actions = ['reopened', 'opened', 'synchronize'];
 
 
 const STATUS_SUCCESS = 'success';
@@ -66,7 +66,7 @@ module.exports.handler = (event, context, callback) => {
 
         var status = _get(body, 'status');
 
-        if(status === 'success') {
+        if(status === 'pass') {
             statusRequest.state = STATUS_SUCCESS;
             statusRequest.description = 'Unit test succeeded';
         } else if (status === 'fail') {

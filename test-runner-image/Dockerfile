@@ -14,12 +14,13 @@ RUN apt-get install -y git
 RUN mkdir /root/.ssh
 
 COPY id_rsa /root/.ssh/id_rsa
+#COPY id_rsa.pub /root/.ssh/id_rsa.pub
 
 # Add file for kendo ui install
 COPY .netrc /root/.netrc
 
 
-# RUN chmod 700 /root/.ssh/id_rsa
+ RUN chmod 700 /root/.ssh/id_rsa
 # RUN chown -R root:root /root/.ssh
 
 RUN touch /root/.ssh/known_hosts
