@@ -2,8 +2,8 @@
 const request = require('request-promise');
 const _get = require('lodash/get');
 const _includes = require('lodash/includes');
-const token = 'ba32224337cb37b2c8e2406dc1d56ff48f04d4dc';
-const TEST_RUNNER_URL = 'http://54.91.4.60';
+const GIT_TOKEN = process.env.TOKEN;
+const TEST_RUNNER_URL = process.env.Test_Runner_Url;
 const actions = ['reopened', 'opened', 'synchronize'];
 
 
@@ -16,7 +16,7 @@ const STATUS_ERROR = 'error';
 var headers =  {
     'Content-Type': 'application/json',
     'user-agent': 'node.js',
-    'Authorization': 'token ' + token
+    'Authorization': 'token ' + GIT_TOKEN
 };
 
 module.exports.handler = (event, context, callback) => {
@@ -28,6 +28,8 @@ module.exports.handler = (event, context, callback) => {
         body: '{}'
     };
 
+    console.log(GIT_TOKEN);
+    console.log(TEST_RUNNER_URL);
     callback(null, response);
 
     var body = event.body? JSON.parse(event.body): {};
